@@ -5,9 +5,10 @@ import axios from "axios";
 import { Code } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+import ReactMarkdown from "react-markdown";
 import { useRouter } from "next/navigation";
 import { ChatCompletionRequestMessage } from "openai";
-import ReactMarkdown from "react-markdown";
 
 import { BotAvatar } from "@/components/bot-avatar";
 import { Heading } from "@/components/heading";
@@ -18,15 +19,15 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
-import { Empty } from "@/components/empty";
+// import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 
 import { formSchema } from "./constants";
 
 const CodePage = () => {
   const router = useRouter();
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const proModal = useProModal();
+  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,9 +46,7 @@ const CodePage = () => {
       };
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/code", {
-        messages: newMessages,
-      });
+      const response = await axios.post("/api/code", { messages: newMessages });
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
@@ -55,6 +54,7 @@ const CodePage = () => {
       if (error?.response?.status === 403) {
         proModal.onOpen();
       } else {
+        toast.error("Something went wrong.");
       }
     } finally {
       router.refresh();
@@ -65,7 +65,7 @@ const CodePage = () => {
     <div>
       <Heading
         title="Code Generation"
-        description="Generate code using descriptive idea."
+        description="Generate code using descriptive text."
         icon={Code}
         iconColor="text-green-700"
         bgColor="bg-green-700/10"
@@ -96,7 +96,7 @@ const CodePage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Simple toggle button using React hooks."
+                        placeholder="Simple toggle button using react hooks."
                         {...field}
                       />
                     </FormControl>
@@ -120,9 +120,9 @@ const CodePage = () => {
               <Loader />
             </div>
           )}
-          {messages.length === 0 && !isLoading && (
+          {/* {messages.length === 0 && !isLoading && (
             <Empty label="No conversation started." />
-          )}
+          )} */}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
               <div
@@ -149,7 +149,7 @@ const CodePage = () => {
                   className="text-sm overflow-hidden leading-7"
                 >
                   {message.content || ""}
-                </ReactMarkdown>{" "}
+                </ReactMarkdown>
               </div>
             ))}
           </div>

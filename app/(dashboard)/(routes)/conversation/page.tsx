@@ -5,6 +5,7 @@ import axios from "axios";
 import { MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ChatCompletionRequestMessage } from "openai";
 
@@ -17,15 +18,15 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
-import { Empty } from "@/components/empty";
+// import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 
 import { formSchema } from "./constants";
 
 const ConversationPage = () => {
   const router = useRouter();
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const proModal = useProModal();
+  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,6 +55,7 @@ const ConversationPage = () => {
       if (error?.response?.status === 403) {
         proModal.onOpen();
       } else {
+        toast.error("Something went wrong.");
       }
     } finally {
       router.refresh();
@@ -119,9 +121,9 @@ const ConversationPage = () => {
               <Loader />
             </div>
           )}
-          {messages.length === 0 && !isLoading && (
+          {/* {messages.length === 0 && !isLoading && (
             <Empty label="No conversation started." />
-          )}
+          )} */}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
               <div
