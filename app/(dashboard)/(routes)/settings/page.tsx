@@ -1,5 +1,3 @@
-"use server";
-
 import { Settings } from "lucide-react";
 
 import { Heading } from "@/components/heading";

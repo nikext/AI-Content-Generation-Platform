@@ -5,23 +5,24 @@ import axios from "axios";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Music } from "lucide-react";
+import { Music, Send } from "lucide-react";
 
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Loader } from "@/components/loader";
-import { Empty } from "@/components/empty";
+// import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 
 import { formSchema } from "./constants";
 
 const MusicPage = () => {
+  const proModal = useProModal();
   const router = useRouter();
   const [music, setMusic] = useState<string>();
-  const proModal = useProModal();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,6 +46,7 @@ const MusicPage = () => {
       if (error?.response?.status === 403) {
         proModal.onOpen();
       } else {
+        toast.error("Something went wrong.");
       }
     } finally {
       router.refresh();
@@ -107,7 +109,9 @@ const MusicPage = () => {
             <Loader />
           </div>
         )}
-        {!music && !isLoading && <Empty label="No music generated." />}
+        {/* {!music && !isLoading && (
+          <Empty label="No music generated." />
+        )} */}
         {music && (
           <audio controls className="w-full mt-8">
             <source src={music} />
