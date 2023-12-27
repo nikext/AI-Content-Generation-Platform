@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "types": ["cypress", "node"],
     "target": "es5",
     "lib": [
+      "es5",
       "dom",
       "dom.iterable",
       "esnext"
@@ -12,7 +14,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -33,8 +35,11 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
+    ".next/types/**/*.ts",
+    "cypress",
+    "jest.config.js",
+    "jest.setup.js"
+],
   "exclude": [
     "node_modules"
   ]

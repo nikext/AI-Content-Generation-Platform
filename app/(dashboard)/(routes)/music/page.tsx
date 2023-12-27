@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Loader } from "@/components/loader";
-// import { Empty } from "@/components/ui/empty";
+import { Empty } from "@/components/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 
 import { formSchema } from "./constants";
@@ -109,9 +109,7 @@ const MusicPage = () => {
             <Loader />
           </div>
         )}
-        {/* {!music && !isLoading && (
-          <Empty label="No music generated." />
-        )} */}
+        {!music && !isLoading && <Empty label="No music generated." />}
         {music && (
           <audio controls className="w-full mt-8">
             <source src={music} />

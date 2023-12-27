@@ -16,7 +16,7 @@ import { Card, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Loader } from "@/components/loader";
-// import { Empty } from "@/components/ui/empty";
+import { Empty } from "@/components/empty";
 import {
   Select,
   SelectContent,
@@ -174,9 +174,9 @@ const PhotoPage = () => {
             <Loader />
           </div>
         )}
-        {/* {photos.length === 0 && !isLoading && (
+        {photos.length === 0 && !isLoading && (
           <Empty label="No images generated." />
-        )} */}
+        )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
           {photos.map((src) => (
             <Card key={src} className="rounded-lg overflow-hidden">
