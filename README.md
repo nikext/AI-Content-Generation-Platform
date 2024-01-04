@@ -1,19 +1,20 @@
-This is a repository for my Bachelor Degree final project | SaaS AI Platform with Next.js 13, React, Tailwind, Prisma, Stripe.
+This is a repository for my Bachelor Degree final project | AI Platform with Next.js 14, React, Tailwind, Prisma, Stripe.
 
 Features:
 
-- Tailwind design
-- Full responsiveness
-- Clerk Authentication (Email, Google, 9+ Social Logins)
+- Tailwind modern & simple design
+- Full mobile/tablet/desktop responsiveness
+- Clerk Auth (Facebook, Email, Google and other social logins)
 - Client form validation and handling
-- Server error handling using react-toast
-- Conversation Generation Tool (Open AI)
-- Image Generation Tool (Open AI)
-- Video Generation Tool (Replicate AI)
-- Music Generation Tool (Replicate AI)
-- Stripe monthly subscription
-- Free tier with API limiting
-- POST, DELETE, and GET routes in route handlers (app/api)
+- Error handling using react-toast
+- Conversation Generation Model (Open AI)
+- Image Generation Model (Open AI)
+- Code Generation Model (Open AI)
+- Video Generation Model (Replicate AI)
+- Music Generation Model (Replicate AI)
+- Stripe monthly subscription to PRO version
+- Free tier with API limitation to 5 generations
+- POST, DELETE, and GET routes in route handlers
 
 ### Prerequisites
 
@@ -32,7 +33,6 @@ npm i
 ```
 
 ### Setup .env file
-
 
 ```js
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
@@ -56,7 +56,7 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 ### Setup Prisma
 
-Add MySQL Database (PlanetScale)
+Create Prisma MySQL Database (PlanetScale)
 
 ```shell
 npx prisma db push
@@ -74,6 +74,8 @@ npm run dev
 
 Running commands with npm `npm run [command]`
 
-| command         | description                              |
-| :-------------- | :--------------------------------------- |
-| `dev`           | Starts a development instance of the app |
+| command        | description                              |
+| :------------- | :--------------------------------------- |
+| `dev`          | Starts a development instance of the app |
+| `cypress open` | Starts Cypress UI testing tool           |
+| `jest`         | Starts Jest Unit tests                   |
