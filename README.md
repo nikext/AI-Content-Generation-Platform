@@ -23,7 +23,7 @@ Features:
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/nikola6669/AI-SaaS.git
+git clone https://github.com/nikola6669/AI-Content-Generation-Platform.git
 ```
 
 ### Install packages
